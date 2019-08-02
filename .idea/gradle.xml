@@ -4,11 +4,29 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/CoordinateToAreaApi" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/CoordinateToAreaApi" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/CruzzeRestApi" />
         <option name="gradleJvm" value="11" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/CruzzeRestApi" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/SourceAnalyzeApi" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/SourceAnalyzeApi" />
           </set>
         </option>
       </GradleProjectSettings>
