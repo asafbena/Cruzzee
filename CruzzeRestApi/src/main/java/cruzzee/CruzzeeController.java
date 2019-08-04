@@ -10,7 +10,7 @@ import cruzzee.schemas.GeoPoint;
 import cruzzee.schemas.Page;
 import org.springframework.web.bind.annotation.*;
 
-import static cruzzee.ContentDownloader.getPagesForAllAreas;
+//import static cruzzee.ContentDownloader.getPagesForAllAreas;
 
 @RestController
 public class CruzzeeController {
