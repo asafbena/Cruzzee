@@ -8,6 +8,7 @@ import com.google.api.services.customsearch.Customsearch;
 import com.google.api.services.customsearch.model.Result;
 import com.google.api.services.customsearch.model.Search;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import cruzzee.schemas.GeoLine;
@@ -37,12 +38,12 @@ public class ContentDownloader {
      * dashboard.
      */
     static String host = "https://api.cognitive.microsoft.com";
-    static String path = "/bing/v7.0/search";
+    static String path = "/bing/v7.0/news/search/";
     static String searchTerm = "Microsoft Cognitive Services";
 
     public static SearchResults SearchWeb(String searchQuery) throws Exception {
         // Construct the URL.
-        URL url = new URL(host + path + "?q=" +  URLEncoder.encode(searchQuery, "UTF-8") + "&count=10");
+        URL url = new URL(host + path + "?q=" +  URLEncoder.encode(searchQuery, "UTF-8") + "&count=20");
 
         // Open the connection.
         HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
@@ -66,6 +67,7 @@ public class ContentDownloader {
         }
 
         stream.close();
+        getProvider(response);
         printUrls(response);
         return results;
     }
@@ -98,17 +100,33 @@ public class ContentDownloader {
         }
     }
 
+    public static void getProvider(String response){
+        JsonParser parser = new JsonParser();
+        JsonObject json = parser.parse(response).getAsJsonObject();
+//        final JsonObject d = json.getAsJsonObject("webPages");
+//        final JsonArray results = d.getAsJsonArray("value");
+        final JsonArray results = json.getAsJsonArray("value");
+        final int resultsLength = results.size();
+        for (int i = 0; i < resultsLength; i++) {
+            JsonObject aResult = (JsonObject) results.get(i);
+            JsonElement d = aResult.get("provider");
+            System.out.println(d.getAsJsonArray().get(0).getAsJsonObject().get("name"));
+//            return .get("name").getAsString();
+        }
+    }
+
     private static void printUrls(String response) {
         JsonParser parser = new JsonParser();
         JsonObject json = parser.parse(response).getAsJsonObject();
-        final JsonObject d = json.getAsJsonObject("webPages");
-        final JsonArray results = d.getAsJsonArray("value");
+//        final JsonObject d = json.getAsJsonObject("webPages");
+//        final JsonArray results = d.getAsJsonArray("value");
+        final JsonArray results = json.getAsJsonArray("value");
         final int resultsLength = results.size();
         for (int i = 0; i < resultsLength; i++) {
             final JsonObject aResult = (JsonObject) results.get(i);
             System.out.println(aResult.get("url"));
             String url = aResult.get("url").getAsString();
-            downloadWebContent(url);
+//            downloadWebContent(url);
         }
     }
 
