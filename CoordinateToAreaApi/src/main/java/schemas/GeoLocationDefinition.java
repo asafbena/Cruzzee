@@ -1,20 +1,30 @@
 package schemas;
 
 public class GeoLocationDefinition {
-    private String Area;
-    private String Country;
+    private String area;
+    private String country;
+    private double distanceFromCountry;
 
+    public GeoLocationDefinition(String area, String country) {
+        this(area, country, 0);
+    }
 
-    public GeoLocationDefinition(String Area, String Country) {
-        this.Area = Area;
-        this.Country = Area;
+    public GeoLocationDefinition(String area, String country, double distanceFromCountry) {
+        this.area = area;
+        this.country = country;
+        this.distanceFromCountry = distanceFromCountry;
     }
 
     public String getArea() {
-        return Area;
+        return area;
     }
 
     public String getCountry() {
-        return Country;
+        return country;
     }
+
+    public double getDistanceFromCountry() {
+        return distanceFromCountry;
+    }
+
 }
