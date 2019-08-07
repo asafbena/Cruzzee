@@ -24,4 +24,5 @@ public class GeoLine {
     public void setEnd(GeoPoint end) {
         this.end = end;
     }
+
 }
