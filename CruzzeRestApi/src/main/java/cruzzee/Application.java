@@ -9,17 +9,22 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 public class Application {
 
     public static void main(String[] args) {
         try {
-            SearchResults result = ContentDownloader.SearchWeb("gulf+of+persian+oil+ship+attack");
-            for (String header : result.relevantHeaders.keySet())
-                System.out.println(header + ": " + result.relevantHeaders.get(header));
-            System.out.println("\nJSON Response:\n");
-            System.out.println(prettify(result.jsonResponse));
+            // TEST
+            List areas = new ArrayList<String>();
+/*            areas.add("red sea");
+            areas.add("arabian sea");
+            areas.add("laccadive sea");*/
+            areas.add("guinea gulf");
+            DangerAnalyzer.getAreaToDanger(areas);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
