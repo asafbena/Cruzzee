@@ -1,6 +1,5 @@
 package cruzzee;
 
-
 import org.geonames.WebService;
 import schemas.GeoLine;
 import schemas.GeoPoint;

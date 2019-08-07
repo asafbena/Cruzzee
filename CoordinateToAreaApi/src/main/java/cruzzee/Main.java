@@ -1,11 +1,8 @@
 package cruzzee;
 
-import org.geonames.Toponym;
-import org.geonames.WeatherObservation;
 import org.geonames.WebService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class Main {
