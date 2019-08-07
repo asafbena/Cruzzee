@@ -12,11 +12,11 @@ public class CoordinateToArea {
         WebService.setUserName("asafcruzzee"); // add your username here
         String area = WebService.ocean(point.getXCoordinate(), point.getYCoordinate());
         List<Toponym> nearbyPlaceName = WebService.findNearbyPlaceName(point.getXCoordinate(), point.getYCoordinate());
-//        String country = nearbyPlaceName.getCountry();
+        String country = nearbyPlaceName.get(0).getCountryName();
 
         ArrayList<String> answer = new ArrayList<>();
         answer.add(area);
-//        answer.add(country);
+        answer.add(country);
 
         //        WeatherObservation weatherObservation = WebService.findNearByWeather(point.getXCoordinate(), point.getYCoordinate());
         //        System.out.println(weatherObservation.getTemperature());
