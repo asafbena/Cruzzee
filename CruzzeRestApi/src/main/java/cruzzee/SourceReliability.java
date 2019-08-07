@@ -97,7 +97,7 @@ public class SourceReliability {
             } catch (IOException ioe) {
                 // nothing to see here
             }
-        }
+
     }
 
     public static void getProvider(String response){
