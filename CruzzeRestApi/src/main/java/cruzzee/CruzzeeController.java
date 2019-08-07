@@ -1,5 +1,6 @@
 package cruzzee;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
@@ -15,8 +16,7 @@ public class CruzzeeController {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
-    @RequestMapping("/cruzzee/routeGeoPoints={routeGeoPoints}&startingPoint={startingPoint}&destination={destination}" +
-            "&departureDate={departureDate}&cargo={cargo}")
+    @RequestMapping("/cruzzee/routeGeoPoints={routeGeoPoints}&departureDate={departureDate}&cargo={cargo}")
     public AreaRisks greeting(@PathVariable("routeGeoPoints") List<Double> routeGeoPoints,
                               @PathVariable String startingPoint,
                               @PathVariable String destination,
@@ -27,8 +27,7 @@ public class CruzzeeController {
         AreaRisks areaRisks = new AreaRisks();
 //        From SourceAnalyzeApi
 //        Map<GeoLine, String> geoLineAreaMap = getLineAreaMap(geoPoints);
-
-//        List<Page> pages = getPagesForAllAreas(geoLineAreaMap);
+        //        List<Page> pages = getPagesForAllAreas(geoLineAreaMap);
         //analyze every page to get its risk(occurrence*consequences)
         // get the final risk after recalculated in order to match the author reliability
         // the numerical risk will be attached to its area and will be returned eventually to web
