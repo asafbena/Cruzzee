@@ -26,7 +26,10 @@ public class GeoLine {
         return endX;
     }
 
-    public double getEndY() {
-        return endY;
-    }
+    public double getEndY() { return endY; }
+
+    public GeoPoint getStartPoint() { return new GeoPoint(this.startX, this.startY); }
+
+    public GeoPoint getEndPoint() { return new GeoPoint(this.endX, this.endY); }
+
 }
