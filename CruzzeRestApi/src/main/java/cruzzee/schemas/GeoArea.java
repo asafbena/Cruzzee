@@ -5,10 +5,10 @@ public class GeoArea {
     private String countryName;
     private double distanceFromCountry;
 
-    public GeoArea(String seaArea, String countryName) {
+    public GeoArea(String seaArea, String countryName, double distanceFromCountry) {
         this.seaArea = seaArea;
         this.countryName = countryName;
-        this.distanceFromCountry = 0;
+        this.distanceFromCountry = distanceFromCountry;
     }
 
     public String getSeaArea() {
