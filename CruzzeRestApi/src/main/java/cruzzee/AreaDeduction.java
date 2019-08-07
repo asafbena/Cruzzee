@@ -10,7 +10,7 @@ class AreaDeduction {
         return (value1 + value2) / 2;
     }
 
-    private static GeoPoint getMiddlePoint(GeoPoint point1, GeoPoint point2) {
+    public static GeoPoint getMiddlePoint(GeoPoint point1, GeoPoint point2) {
         return new GeoPoint(
                 getAverage(point1.getXCoordinate(), point2.getXCoordinate()),
                 getAverage(point1.getYCoordinate(), point2.getYCoordinate())
