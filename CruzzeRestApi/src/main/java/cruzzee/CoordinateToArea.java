@@ -12,15 +12,28 @@ import java.util.List;
 import static cruzzee.AreaDeduction.getMiddlePoint;
 
 public class CoordinateToArea {
+    public static HashMap<GeoLine, GeoArea> calculateGeoArea(List<GeoLine> geoLines) {
+        HashMap<GeoLine, GeoArea> geoLinesToGeoAreas = new HashMap<>();
 
-//    private static HashMap<GeoLine, GeoArea> unifyGeoLines(HashMap<GeoLine, GeoArea> geoMap) {
-//        for (GeoLine geoline: geoMap.keySet()) {
-//            geoMap.get(geoline).;
-//        }
-//    }
+        for (GeoLine geoLine : geoLines) {
+            HashMap<GeoLine, GeoArea> dividedMap;
+            try {
+                dividedMap = divideAndUnify(geoLine);
+            } catch (Exception e) {
+                e.printStackTrace();
+                break;
+            }
 
-    private static ArrayList<GeoLine> divideAndUnify(GeoLine geoLine) throws Exception {
-        ArrayList<GeoLine> geoLines = new ArrayList<GeoLine>();
+            for (GeoLine dividedLine : dividedMap.keySet()) {
+                geoLinesToGeoAreas.put(geoLine, dividedMap.get(dividedLine));
+            }
+        }
+
+        return geoLinesToGeoAreas;
+    }
+
+    private static HashMap<GeoLine, GeoArea> divideAndUnify(GeoLine geoLine) throws Exception {
+        HashMap<GeoLine, GeoArea> geoMap = new HashMap<>();
 
         // Get start and end points of geoline
         GeoPoint point1 = new GeoPoint(geoLine.getStartX(), geoLine.getStartY());
@@ -41,8 +54,9 @@ public class CoordinateToArea {
         // if so, unify the lines
         if (geoArea1.getSeaArea().equals(geoArea2.getSeaArea()) &&
             geoArea1.getCountryName().equals(geoArea2.getCountryName())) {
-            geoLines.add(geoLine);
-            return geoLines;
+            GeoArea geoArea = returnAreaAndCountry(middlePoint);
+            geoMap.put(geoLine, geoArea);
+            return geoMap;
         }
 
         GeoLine line1 = new GeoLine(point1.getXCoordinate(), point1.getYCoordinate(),
@@ -50,31 +64,9 @@ public class CoordinateToArea {
         GeoLine line2 = new GeoLine(middlePoint.getXCoordinate(), middlePoint.getYCoordinate(),
                 point2.getXCoordinate(), point2.getYCoordinate());
 
-        geoLines.add(line1);
-        geoLines.add(line2);
-        return geoLines;
-    }
-
-    public static HashMap<GeoLine, GeoArea> calculateGeoArea(List<GeoLine> geoLines) throws Exception {
-        HashMap<GeoLine, GeoArea> geoLinesToGeoAreas = new HashMap<>();
-        ArrayList<GeoLine> extendedGeoLines = new ArrayList<>();
-
-        for (GeoLine geoLine : geoLines) {
-            ArrayList<GeoLine> dividedLines = divideAndUnify(geoLine);
-
-            GeoPoint middlePoint = getMiddlePoint(new GeoPoint(geoLine.getStartX(), geoLine.getStartY()),
-                    new GeoPoint(geoLine.getEndX(), geoLine.getEndY()));
-
-            geoLinesToGeoAreas.put(geoLine, returnAreaAndCountry(middlePoint));
-        }
-
-        return geoLinesToGeoAreas;
-    }
-
-    private static double calculateDistance(GeoPoint point1, GeoPoint point2) {
-        double distance = Math.hypot(point1.getXCoordinate()-point2.getYCoordinate(),
-                                     point1.getYCoordinate()-point2.getYCoordinate());
-        return distance;
+        geoMap.put(line1, geoArea1);
+        geoMap.put(line2, geoArea1);
+        return geoMap;
     }
 
     public static GeoArea returnAreaAndCountry(GeoPoint point) throws Exception {
@@ -102,5 +94,10 @@ public class CoordinateToArea {
         double countryYCoordinate = nearbyPlaceName.get(0).getLongitude();
         GeoPoint countryGeoPoint = new GeoPoint(countryXCoordinate, countryYCoordinate);
         return calculateDistance(point, countryGeoPoint);
+    }
+
+    private static double calculateDistance(GeoPoint point1, GeoPoint point2) {
+        return Math.hypot(point1.getXCoordinate()-point2.getYCoordinate(),
+                point1.getYCoordinate()-point2.getYCoordinate());
     }
 }
