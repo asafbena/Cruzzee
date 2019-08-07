@@ -1,7 +1,6 @@
 package cruzzee;
 
 import cruzzee.schemas.GeoPoint;
-
 import java.util.List;
 
 class AreaDeduction {
@@ -12,8 +11,8 @@ class AreaDeduction {
 
     private static GeoPoint getMiddlePoint(GeoPoint point1, GeoPoint point2) {
         return new GeoPoint(
-                getAverage(point1.getXCoordinate(), point2.getXCoordinate()),
-                getAverage(point1.getYCoordinate(), point2.getYCoordinate())
+                getAverage(point1.getLatitude(), point2.getLatitude()),
+                getAverage(point1.getLongitude(), point2.getLongitude())
         );
     }
 

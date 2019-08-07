@@ -14,7 +14,7 @@ public class CoordinateToArea {
     public static Map<GeoLine, GeoLocationDefinition> getAreaToCoordinateStream(List<GeoLine> geoLines) throws Exception {
         WebService.setUserName("asafcruzzee"); // add your username here
         Map<GeoLine, GeoLocationDefinition> geoPointsDefinitions = new HashMap<>();
-        for (GeoLine geoLine: geoLines) {
+        for (GeoLine geoLine : geoLines) {
             geoPointsDefinitions.put(geoLine, calculateLocationDefinition(geoLine));
         }
         System.out.println("Done");
@@ -30,21 +30,29 @@ public class CoordinateToArea {
     }
 
     private static String getArea(GeoPoint geoPoint) throws Exception {
-        return WebService.ocean(geoPoint.getXCoordinate(), geoPoint.getYCoordinate());
+        return WebService.ocean(geoPoint.getLatitude(), geoPoint.getLongitude());
     }
 
     private static String getCountry(GeoPoint geoPoint) throws Exception {
-        Toponym firstCountryObject =
-                WebService.findNearbyPlaceName(geoPoint.getXCoordinate(),geoPoint.getYCoordinate()).get(0);
-        return firstCountryObject.getCountryName();
+        List<Toponym> nearbyPlaceName = WebService.findNearbyPlaceName(geoPoint.getLatitude(), geoPoint.getLongitude());
+        if (!nearbyPlaceName.isEmpty()) {
+
+            Toponym firstCountryObject =
+                    nearbyPlaceName.get(0);
+            return firstCountryObject.getCountryName();
+        }
+        return "";
     }
 
     private static double getDistanceFromCountry(GeoPoint geoPoint) throws Exception {
-        Toponym firstCountryObject =
-                WebService.findNearbyPlaceName(geoPoint.getXCoordinate(),geoPoint.getYCoordinate()).get(0);
-        double countryXCoordinate = firstCountryObject.getLatitude();
-        double countryYCoordinate = firstCountryObject.getLongitude();
-        GeoPoint countryGeoPoint = new GeoPoint(countryXCoordinate, countryYCoordinate);
-        return EarthDistance.calculateDistance(countryGeoPoint, geoPoint);
+        List<Toponym> nearbyPlaceName = WebService.findNearbyPlaceName(geoPoint.getLatitude(), geoPoint.getLongitude());
+        if(!nearbyPlaceName.isEmpty()) {
+            Toponym firstCountryObject =
+                    nearbyPlaceName.get(0);
+            double countryXCoordinate = firstCountryObject.getLatitude();
+            double countryYCoordinate = firstCountryObject.getLongitude();
+        }
+
+        return 0;
     }
 }

@@ -15,15 +15,10 @@ import java.util.List;
 public class Application {
 
     public static void main(String[] args) {
-        CoordinateToArea.calculateGeoArea(Collections.emptyList());
         try {
-            // TEST
+/*            // TEST
             List areas = new ArrayList<String>();
-/*            areas.add("red sea");
-            areas.add("arabian sea");
-            areas.add("laccadive sea");*/
-            areas.add("persian sea iran");
-            DangerAnalyzer.getDangerForArea("persian gulf", "iran");
+            DangerAnalyzer.getDangerForArea("gulf of persia", "iran", "oil");*/
 
         } catch (Exception e) {
             e.printStackTrace();

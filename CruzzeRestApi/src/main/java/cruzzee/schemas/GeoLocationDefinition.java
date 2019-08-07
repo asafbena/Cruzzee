@@ -5,6 +5,10 @@ public class GeoLocationDefinition {
     private String country;
     private double distanceFromCountry;
 
+    public GeoLocationDefinition() {
+
+    }
+
     public GeoLocationDefinition(String area, String country) {
         this(area, country, 0);
     }

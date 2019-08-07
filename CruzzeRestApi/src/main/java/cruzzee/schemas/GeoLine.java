@@ -1,8 +1,12 @@
 package cruzzee.schemas;
 
 public class GeoLine {
-    private GeoPoint start;
-    private GeoPoint end;
+    public GeoPoint start;
+    public GeoPoint end;
+
+    public GeoLine() {
+
+    }
 
     public GeoLine(GeoPoint startPoint, GeoPoint endPoint) {
         this.start = startPoint;

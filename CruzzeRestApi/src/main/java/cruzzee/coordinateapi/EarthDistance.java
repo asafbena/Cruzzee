@@ -36,10 +36,10 @@ public class EarthDistance {
 
     public static double calculateDistance(GeoPoint point1, GeoPoint point2) {
         return distance(
-                point1.getXCoordinate(),
-                point2.getXCoordinate(),
-                point1.getYCoordinate(),
-                point2.getYCoordinate(),
+                point1.getLatitude(),
+                point2.getLatitude(),
+                point1.getLongitude(),
+                point2.getLongitude(),
                 0,
                 0);
     }

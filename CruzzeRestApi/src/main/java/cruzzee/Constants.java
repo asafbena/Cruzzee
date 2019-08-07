@@ -22,7 +22,7 @@ public final class Constants {
     );
 
     final static Map<Dangers, String> dangersSearchQuery = ImmutableMap.of(
-            Dangers.PIRATE, "+pirate+attack",
-            Dangers.ATTACK, "+attack"
+            Dangers.PIRATE, "+pirate+attack+ship",
+            Dangers.ATTACK, "+attack+ship"
     );
 }

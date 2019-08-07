@@ -4,6 +4,10 @@ public class RiskDescription {
     private int dangerLevel;
     private String info;
 
+    public RiskDescription() {
+
+    }
+
     public RiskDescription(int dangerLevel, String info) {
         this.dangerLevel = dangerLevel;
         this.info = info;

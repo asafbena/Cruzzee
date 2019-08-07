@@ -18,8 +18,8 @@ class AreaDeduction {
 
     public static GeoPoint getMiddlePoint(GeoPoint point1, GeoPoint point2) {
         return new GeoPoint(
-                getDoubleMiddle(point1.getXCoordinate(), point2.getXCoordinate()),
-                getDoubleMiddle(point1.getYCoordinate(), point2.getYCoordinate())
+                getDoubleMiddle(point1.getLatitude(), point2.getLatitude()),
+                getDoubleMiddle(point1.getLongitude(), point2.getLongitude())
         );
     }
 

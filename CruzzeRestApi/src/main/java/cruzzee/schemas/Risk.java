@@ -1,11 +1,12 @@
 package cruzzee.schemas;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Risk {
     private GeoLine line;
-    private RiskDescription riskDesc;
+    private RiskDescription riskDescList;
 
     public GeoLine getLine() {
         return line;
@@ -16,15 +17,15 @@ public class Risk {
     }
 
     public RiskDescription getRiskDesc() {
-        return riskDesc;
+        return riskDescList;
     }
 
     public void setRiskDesc(RiskDescription riskDesc) {
-        this.riskDesc = riskDesc;
+        this.riskDescList = riskDesc;
     }
 
     public Risk(GeoLine line, RiskDescription riskDesc) {
         this.line = line;
-        this.riskDesc = riskDesc;
+        this.riskDescList = riskDesc;
     }
 }

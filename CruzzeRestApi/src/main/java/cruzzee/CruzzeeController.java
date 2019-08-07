@@ -24,7 +24,7 @@ public class CruzzeeController {
 
 
     @RequestMapping(value = "/risk", method = RequestMethod.POST)
-    public ResponseEntity<List<Risk>> persistPerson(@RequestBody Trip trip) {
+    public ResponseEntity<List<Risk>> persistRisk(@RequestBody  Trip trip) {
 
         List<Risk> risks = new ArrayList<>();
 
@@ -35,13 +35,12 @@ public class CruzzeeController {
             for (GeoLine geoLine : results) {
                 String country = areaToCoordinateStream.get(geoLine).getCountry();
                 String area = areaToCoordinateStream.get(geoLine).getArea();
-                risks.add(new Risk(geoLine, new RiskDescription(
-                        DangerAnalyzer.getDangerForArea(area, country), "matan fleishman")
-                ));
+                risks.add(new Risk(geoLine, DangerAnalyzer.getDangerForArea(area, country, trip.getTripDescription().getVesselContents())));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 
         return ResponseEntity.ok(risks);
     }
