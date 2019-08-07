@@ -110,7 +110,7 @@ public class ContentDownloader {
         for (int i = 0; i < resultsLength; i++) {
             JsonObject aResult = (JsonObject) results.get(i);
             JsonElement d = aResult.get("provider");
-            //System.out.println(d.getAsJsonArray().get(0).getAsJsonObject().get("name"));
+            System.out.println(d.getAsJsonArray().get(0).getAsJsonObject().get("name"));
 //            return .get("name").getAsString();
         }
     }
@@ -124,7 +124,7 @@ public class ContentDownloader {
         final int resultsLength = results.size();
         for (int i = 0; i < resultsLength; i++) {
             final JsonObject aResult = (JsonObject) results.get(i);
-            //System.out.println(aResult.get("url"));
+            System.out.println(aResult.get("url"));
             String url = aResult.get("url").getAsString();
 //            downloadWebContent(url);
         }

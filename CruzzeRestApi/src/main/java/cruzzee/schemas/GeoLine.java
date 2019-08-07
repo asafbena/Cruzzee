@@ -1,28 +1,33 @@
 package cruzzee.schemas;
 
 public class GeoLine {
-    private GeoPoint start;
-    private GeoPoint end;
+    private double startX;
+    private double startY;
+    private double endX;
+    private double endY;
 
-    public GeoLine(GeoPoint startPoint, GeoPoint endPoint) {
-        this.start = startPoint;
-        this.end = endPoint;
+
+    public GeoLine(double startX, double startY, double endX, double endY) {
+        this.startX = startX;
+        this.startY = startY;
+        this.endX = endX;
+        this.endY = endY;
     }
 
-    public GeoPoint getStart() {
-        return start;
+    public double getStartX() {
+        return startX;
     }
 
-    public void setStart(GeoPoint start) {
-        this.start = start;
+    public double getStartY() {
+        return startY;
     }
 
-    public GeoPoint getEnd() {
-        return end;
+    public double getEndX() {
+        return endX;
     }
 
-    public void setEnd(GeoPoint end) {
-        this.end = end;
+    public double getEndY() {
+        return endY;
     }
 
 }

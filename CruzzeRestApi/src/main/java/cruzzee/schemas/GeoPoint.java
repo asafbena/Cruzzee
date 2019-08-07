@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GeoPoint {
-    private final double latitude;
-    private final double longitude;
+    private final double xCoordinate;
+    private final double yCoordinate;
 
     public GeoPoint(double xCoordinate, double yCoordinate) {
-        this.latitude = xCoordinate;
-        this.longitude = yCoordinate;
+        this.xCoordinate = xCoordinate;
+        this.yCoordinate = yCoordinate;
     }
 
     public double getXCoordinate(){
-        return latitude;
+        return xCoordinate;
     }
 
     public double getYCoordinate(){
-        return longitude;
+        return yCoordinate;
     }
 
     public static List<GeoPoint> getPointsFromCoordinates(List<Double> coordinates){
