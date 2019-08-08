@@ -11,11 +11,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static cruzzee.SourceReliability.SearchWeb;
+
 @SpringBootApplication
 public class Application {
 
     public static void main(String[] args) {
         try {
+//            SearchWeb("washington post");
 /*            // TEST
             List areas = new ArrayList<String>();
             DangerAnalyzer.getDangerForArea("gulf of persia", "iran", "oil");*/

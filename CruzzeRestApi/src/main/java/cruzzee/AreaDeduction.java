@@ -3,7 +3,7 @@ package cruzzee;
 import cruzzee.schemas.GeoPoint;
 import java.util.List;
 
-class AreaDeduction {
+public class AreaDeduction {
 
     private static double getAverage(double value1, double value2) {
         return (value1 + value2) / 2;

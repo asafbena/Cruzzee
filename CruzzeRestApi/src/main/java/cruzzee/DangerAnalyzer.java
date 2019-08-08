@@ -2,10 +2,7 @@ package cruzzee;
 
 import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import cruzzee.schemas.RiskDescription;
 import org.springframework.util.StringUtils;
 
@@ -13,12 +10,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static cruzzee.SourceReliability.SearchWeb;
+
 public final class DangerAnalyzer {
 
     private static final Gson GSON = new Gson();
     private static final JsonParser PARSER = new JsonParser();
 
-    public static RiskDescription getDangerForArea(String area, String country, String cargo) {
+    public static RiskDescription getDangerForArea(String area, String country, String cargo) throws Exception {
         int overallRisk = 0;
         List<RiskDescription> tempRiskDescriptions = new ArrayList();
 //        RiskDescription riskDescriptions = new ArrayList();
@@ -64,8 +63,10 @@ public final class DangerAnalyzer {
                     for (String relevantHeader : relevantHeaders) {
                         estimatedRisk += estimateRisk(danger, relevantHeader);
                     }
-
+                    double reliability = SearchWeb(getProvider(resultJson));
                     overallRisk += estimatedRisk;
+                    System.out.println("reli : " + reliability);
+                    overallRisk *= reliability;
                 }
 
                 if (country.isEmpty()) {
@@ -86,11 +87,32 @@ public final class DangerAnalyzer {
             else
                 info = info + riskDescription.getInfo();
         }
-        danger = danger / tempRiskDescriptions.size();
+        if(!tempRiskDescriptions.isEmpty()) {
+            danger = danger / tempRiskDescriptions.size();
+        } else {
+            danger = 0;
+        }
         if(danger > 10)
             danger = 10;
 //        riskDescriptions.add(new RiskDescription(danger, info));
         return new RiskDescription(danger, info);
+    }
+
+    public static String getProvider(JsonArray response){
+//        JsonParser parser = new JsonParser();
+//        JsonObject json = parser.parse(response).getAsJsonObject();
+//        final JsonObject d = json.getAsJsonObject("webPages");
+//        final JsonArray results = d.getAsJsonArray("value");
+//        final JsonArray results = json.getAsJsonArray("value");
+        final int resultsLength = response.size();
+        for (int i = 0; i < resultsLength; i++) {
+            JsonObject aResult = (JsonObject) response.get(i);
+            JsonElement d = aResult.get("provider");
+            System.out.println(d.getAsJsonArray().get(0).getAsJsonObject().get("name"));
+            return d.getAsJsonArray().get(0).getAsJsonObject().get("name").getAsString();
+//            return .get("name").getAsString();
+        }
+        return "";
     }
 
     private static int getHeaderRelevance(String header, String area, String country) {
